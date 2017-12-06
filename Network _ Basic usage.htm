@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!-- saved from url=(0049)http://visjs.org/examples/network/basicUsage.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Network | Basic usage</title>
+
+  <script type="text/javascript" src="./Network _ Basic usage_files/vis.js.下载"></script>
+  <link href="./Network _ Basic usage_files/vis-network.min.css" rel="stylesheet" type="text/css">
+
+  <style type="text/css">
+    #mynetwork {
+      width: 600px;
+      height: 400px;
+      border: 1px solid lightgray;
+    }
+  </style>
+</head>
+<body>
+
+<p>
+  Create a simple network with some nodes and edges.
+</p>
+
+<div id="mynetwork"><div class="vis-network" tabindex="900" style="position: relative; overflow: hidden; touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); width: 100%; height: 100%;"><canvas style="position: relative; touch-action: none; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); width: 100%; height: 100%;" width="600" height="400"></canvas></div></div>
+
+<script type="text/javascript">
+  // create an array with nodes
+  var nodes = new vis.DataSet([
+    {id: 0, label: 'Node 1',title:"0"},
+    {id: 1, label: 'Node 2',title:"1"},
+    {id: 2, label: 'Node 3',title:"2"},
+    {id: 3, label: 'Node 4',title:"3"},
+    {id: 4, label: 'Node 5',title:"4"}
+  ]);
+
+  // create an array with edges
+  var edges = new vis.DataSet([
+    {id: 1,from: 1, to: 3, label: 'edge 1',title:"1"},
+    {id: 2,from: 1, to: 2, label: 'edge 1',title:"2"},
+    {id: 3,from: 2, to: 4, label: 'edge 1',title:"3"},
+    {id: 4,from: 2, to: 5, label: 'edge 1',title:"4"},
+    {id: 5,from: 3, to: 3, label: 'edge 1',title:"5"}
+  ]);
+
+  // create a network
+  var container = document.getElementById('mynetwork');
+  var data = {
+    nodes: nodes,
+    edges: edges
+  };
+  var options = {
+	nodes:{
+		size:30,
+		image:"data:image/png;base64,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 QmCC",
+		shape: 'image'
+	},
+	edges:{
+		arrows: {
+                to: {enabled: true, scaleFactor: 0.5, type: 'arrow'},
+                from: {enabled: true, scaleFactor: 0, type: 'circle'}
+            },
+        smooth: false,
+	}
+  };
+  var network = new vis.Network(container, data, options);
+  
+  
+  network.on('click', function (params) {
+            if (params.nodes[0] != null) {
+                for (var i = 0; i < nodes.length; i++) {
+                    var node = nodes._data[i];
+                    nodes.update({id: node.id, size: 14, font: {size: 1}});
+                }
+
+                var arr = Object.keys(edges._data);
+                for (var i = 0; i < arr.length; i++) {
+                    var edge = edges._data[arr[i]];
+                    edges.update({id: edge.id, hidden: true, font: {size: 0}});
+                }
+
+				//孤立节点
+				nodes.update({id: params.nodes[0], size: 30, font: {size: 14}});
+                params.edges.forEach(function (e) {
+                    edges.update({id: e, hidden: false, font: {size: 1}});
+
+                    var from = edges._data[e].from;
+                    var to = edges._data[e].to;
+                    nodes.update({id: from, size: 30, font: {size: 14}});
+                    nodes.update({id: to, size: 30, font: {size: 14}});
+                });
+            } else {
+                for (var i = 0; i < nodes.length; i++) {
+                    var e = nodes._data[i];
+                    nodes.update({id: e.id, size: 30, font: {size: 14}});
+                }
+
+                var arr = Object.keys(edges._data);
+                for (var i = 0; i < arr.length; i++) {
+                    var e = edges._data[arr[i]];
+                    edges.update({id: e.id, hidden: false, font: {size: 5}});
+                }
+            }
+        });
+</script>
+
+
+
+
+</body></html>
